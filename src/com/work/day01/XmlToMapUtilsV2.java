@@ -12,13 +12,13 @@ import java.util.*;
 /**
  * 将xml 报文转换成 map
  */
-public class XmlToMapUtils {
+public class XmlToMapUtilsV2 {
     public static void main(String[] args) throws IOException, DocumentException {
-        FileInputStream fis = new FileInputStream("d://demo.xml");
+        /*FileInputStream fis = new FileInputStream("d://demo.xml");
         byte[] b = new byte[fis.available()];
         fis.read(b);
-        String str = new String(b,"UTF-8");
-        Document doc = DocumentHelper.parseText(str);
+        String str = new String(b,"UTF-8");*/
+        Document doc = DocumentHelper.parseText(getString());
         System.out.println(doc.asXML());
         long beginTime = System.currentTimeMillis();
         Map<String, Object> map = Dom2Map(doc);
@@ -88,5 +88,21 @@ public class XmlToMapUtils {
         }else
             map.put(e.getName(), e.getText());
         return map;
+    }
+
+    public static String getString(){
+        String str = "<?xml version='1.0' encoding = 'UTF-8'?> ";
+        str+= "<RES_OUT>";
+        str+= "<BUSI_INFO>";
+        str+="<TEMPLET_ID>20008</TEMPLET_ID>";
+        str+="<TEMPLET_CODE>code</TEMPLET_CODE>";
+        str+= "</BUSI_INFO>";
+        str+="<PUB_INFO>";
+        str+="<BUSI_TYPE>1</BUSI_TYPE>";
+        str+="<USE_RANGE>2</USE_RANGE>";
+        str+="<REGION_ID>3</REGION_ID>";
+        str+="</PUB_INFO>";
+        str+= "</RES_OUT>";
+        return str;
     }
 }
